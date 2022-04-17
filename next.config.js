@@ -1,20 +1,21 @@
 // If such a type existed...
 
 const path = require('path')
-// require("dotenv").config();
 const plugins = require('next-compose-plugins')
-
-const withOffline = require('next-offline')
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
 
 const nextConfig = {
-  webpack(config, { webpack, dev, isServer }) {
+  webpack(config, { webpack, isServer }) {
     config.plugins.push(
       new webpack.ProvidePlugin({
         React: 'react',
       })
     )
 
+    config.resolve.alias['@app'] = path.join(__dirname, 'app')
     config.resolve.alias['@config'] = path.join(__dirname, 'app/config')
+    config.resolve.alias['@auth'] = path.join(__dirname, 'app/auth')
     config.resolve.alias['contents'] = path.join(
       __dirname,
       'resources/contents'
@@ -35,7 +36,7 @@ const nextConfig = {
     )
     config.resolve.alias['@libs'] = path.join(__dirname, 'libs')
     config.resolve.alias['@contexts'] = path.join(__dirname, 'app/contexts')
-    config.resolve.alias['@redux'] = path.join(__dirname, 'app/redux')
+    config.resolve.alias['@store'] = path.join(__dirname, 'app/store')
     config.resolve.alias['public'] = path.join(__dirname, 'public')
 
     // audio support
@@ -62,40 +63,19 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  pwa: {
+    disable: process.env.NODE_ENV !== 'production',
+    dest: 'public',
+    runtimeCaching,
+  },
 }
 
 // const withTM = require('next-transpile-modules')(['three', '@react-three/drei'])
 
-module.exports = plugins(
-  [
-    withOffline,
-    {
-      workboxOpts: {
-        swDest: process.env.NEXT_EXPORT
-          ? 'service-worker.js'
-          : 'static/service-worker.js',
-        runtimeCaching: [
-          {
-            urlPattern: /^https?.*/,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'offlineCache',
-              expiration: {
-                maxEntries: 200,
-              },
-            },
-          },
-        ],
-      },
-      async rewrites() {
-        return [
-          {
-            source: '/service-worker.js',
-            destination: '/_next/static/service-worker.js',
-          },
-        ]
-      },
-    },
-  ],
-  nextConfig
-)
+module.exports = plugins([withPWA], nextConfig)

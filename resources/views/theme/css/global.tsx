@@ -1,19 +1,15 @@
 import { css, Global } from '@emotion/react'
 import Color from '../color'
 
-export const globalStyles = (Darkmode: boolean = true) => (
+export const globalStyles = (Darkmode = true) => (
   <Global
     styles={css`
       * {
-        /* cursor: none; */
         font-family: 'Poppins';
         margin: 0;
         padding: 0;
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
-        @media (max-width: 480px) {
-          cursor: auto;
-        }
       }
       *::-webkit-scrollbar {
         display: none;
@@ -22,38 +18,30 @@ export const globalStyles = (Darkmode: boolean = true) => (
       body {
         width: 100%;
         height: 100vh;
-        margin: 0;
         padding: 0;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        color: ${Darkmode ? Color.Text : '#000'};
-        background-color: ${Darkmode ? Color.Background : '#FFF'};
+        color: ${Darkmode ? '#FFF' : '#000'};
+        background-color: ${Darkmode ? Color.background[1] : '#FFF'};
         -webkit-text-size-adjust: 100%;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       ::selection {
         color: #000;
-        background: ${Color.Primary}; /* WebKit/Blink Browsers */
+        background: ${Color.primary[0]}; /* WebKit/Blink Browsers */
       }
       ::-moz-selection {
         color: #000;
-        background: ${Color.Primary}; /* Gecko Browsers */
-      }
-
-      html {
-        tab-size: 4;
+        background: ${Color.primary[0]}; /* Gecko Browsers */
       }
 
       canvas {
         width: 100%;
         height: 100vh;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
       }
 
       [tabindex='-1']:focus:not(:focus-visible) {
@@ -70,80 +58,6 @@ export const globalStyles = (Darkmode: boolean = true) => (
 
       hr:not([size]) {
         height: 1px;
-      }
-
-      blockquote,
-      dl,
-      dd,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      hr,
-      figure,
-      p,
-      pre {
-        margin: 0;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-weight: 500;
-        line-height: 1.2;
-      }
-
-      h1 {
-        font-size: calc(1.375rem + 1.5vw);
-      }
-
-      @media (min-width: 1200px) {
-        h1 {
-          font-size: 2.5rem;
-        }
-      }
-
-      h2 {
-        font-size: calc(1.325rem + 0.9vw);
-      }
-
-      @media (min-width: 1200px) {
-        h2 {
-          font-size: 2rem;
-        }
-      }
-
-      h3 {
-        font-size: calc(1.3rem + 0.6vw);
-      }
-
-      @media (min-width: 1200px) {
-        h3 {
-          font-size: 1.75rem;
-        }
-      }
-
-      h4 {
-        font-size: calc(1.275rem + 0.3vw);
-      }
-
-      @media (min-width: 1200px) {
-        h4 {
-          font-size: 1.5rem;
-        }
-      }
-
-      h5 {
-        font-size: 1.25rem;
-      }
-
-      h6 {
-        font-size: 1rem;
       }
 
       abbr[title],
@@ -210,12 +124,12 @@ export const globalStyles = (Darkmode: boolean = true) => (
       }
 
       a {
-        color: ${Color.Text};
+        color: ${Darkmode ? '#FFF' : '#000'};
         text-decoration: none;
       }
 
       a:hover {
-        color: ${Color.Text};
+        color: ${Darkmode ? '#FFF' : '#000'};
         text-decoration: none;
       }
 

@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import { home as Home } from 'pages/home'
+import Home from 'pages/home'
 
 const Example = () => {
   return <Home />
@@ -8,9 +8,7 @@ const Example = () => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      title: 'iFramework Pro | Home page',
-      //   description: '',
-      //   coverImg: '',
+      title: 'IJN Boilerplate Basic',
     },
   }
 }

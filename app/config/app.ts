@@ -1,6 +1,12 @@
-const config = {}
+const config: {
+  NAME?: string
+  VERSION?: string
+  UPDATE_DATE?: string
+  GOOGLE_ANALYTICS?: string
+  GOOGLE_TAG_MANAGER?: string
+} = {}
 
-config.NAME = 'iFramework Basic'
+config.NAME = 'IJN Boilerplate Basic'
 config.VERSION = ''
 config.UPDATE_DATE = ''
 config.GOOGLE_ANALYTICS = ''

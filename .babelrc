@@ -7,10 +7,6 @@
         "transform-runtime": {},
         "styled-jsx": {},
         "class-properties": {}
-        // "preset-react": {
-        //   "runtime": "automatic",
-        //   "importSource": "@emotion/react"
-        // }
       }
     ]
   ],

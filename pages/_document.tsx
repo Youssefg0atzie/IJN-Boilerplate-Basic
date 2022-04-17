@@ -21,12 +21,14 @@ class IJNDocument extends Document {
       <Html>
         <Head />
         <body>
-          <noscript
-            dangerouslySetInnerHTML={{
-              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${app.GOOGLE_TAG_MANAGER}"
-              height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
-            }}
-          ></noscript>
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${app.GOOGLE_TAG_MANAGER}`}
+              height='0'
+              width='0'
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
           <Main />
           <NextScript />
         </body>
